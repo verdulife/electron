@@ -1,0 +1,45 @@
+{
+	"name": "svelte-vite-electron",
+	"version": "0.0.0",
+	"license": "MIT",
+	"scripts": {
+		"dev": "cross-env NODE_ENV=development elecrun --vite --preload preload.ts",
+		"preview": "npm build && cross-env NODE_ENV=production electron ./app/",
+		"build": "elecrun build --preload preload.ts && vite build",
+		"clean": "elecrun clean",
+		"pack": "npm run build && npm run rebuild && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder -c ./electron-builder.yml --win --linux",
+		"pack:all": "npm run build && npm run rebuild && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder -c ./electron-builder.yml --win --linux --mac",
+		"pack:win": "npm run build && npm run rebuild && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder -c ./electron-builder.yml --win",
+		"pack:mac": "npm run build && npm run rebuild && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder -c ./electron-builder.yml --mac",
+		"pack:linux": "npm run build && npm run rebuild && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder -c ./electron-builder.yml --linux",
+		"rebuild": "electron-rebuild -m ./app",
+		"postinstall": "electron-builder install-app-deps",
+		"prettier": "prettier -w ."
+	},
+	"devDependencies": {
+		"@sveltejs/vite-plugin-svelte": "^1.0.0-next.10",
+		"@types/node": "^15.12.1",
+		"chalk": "^4.1.0",
+		"cross-env": "^7.0.3",
+		"electron": "^13.1.1",
+		"electron-builder": "^22.10.5",
+		"electron-rebuild": "^2.3.5",
+		"electron-run": "^2.0.1",
+		"esbuild": "^0.12.6",
+		"prettier": "^2.3.0",
+		"svelte": "^3.38.2",
+		"svelte-preprocess": "^4.7.3",
+		"ts-node": "^10.0.0",
+		"tslib": "^2.2.0",
+		"typescript": "^4.3.2",
+		"vite": "^2.0.1"
+	},
+	"dependencies": {
+		"autoprefixer": "^10.4.4",
+		"custom-electron-titlebar": "^4.1.0",
+		"fs-extra": "^10.0.0",
+		"postcss": "^8.4.12",
+		"sass": "^1.49.11",
+		"verdu": "^1.3.3"
+	}
+}
